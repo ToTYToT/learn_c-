@@ -1,0 +1,61 @@
+Point.cc 
+1,构造函数可以进行重载的
+2,有参构造函数
+
+Point2.cc
+1,初始化列表
+
+Point3.cc
+1,析构函数
+2,在退出作用域时，析构函数启动
+
+Point4.cc
+//复制构造函数的参数只能是const 引用，不能是对象，
+//如果参数是对象，在发生复制构造时，会导致无穷递归，
+//直到栈溢出
+
+0. 当天代码全部实现一遍
+
+1. C++内存布局分为几个区域，各自具备什么特点？
+
+2. 面向对象设计方法中的抽象与封装特性是如何在C++中体现的？
+
+3. 当定义类时，编译器会为类自动生成哪些函数？
+这些函数各自都有什么特点？
+
+4. 什么是深拷贝与浅拷贝？
+
+5. 实现一个String类，保证main函数对正确执行
+class String
+{
+	public:
+		String();
+		String(const char *pstr);
+		String(const String & rhs);
+		String & operator=(const String & rhs);
+		~String();
+
+		void print();
+
+	private:
+		char * _pstr;
+};
+
+int main(void)
+{
+	String str1;
+	str1.print();
+
+	String str2 = "Hello,world";
+	String str3 = "wangdao";
+
+	str2.print();str2
+		str3.print();
+	str2 = str3;
+	str2.print();print
+
+		String str4 = str3;
+	str4.print();
+	return 0;
+}
+

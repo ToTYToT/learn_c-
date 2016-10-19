@@ -1,0 +1,27 @@
+ ///
+ /// @file    the_2th.cc
+ /// @author  ToTYToT(hongzimeng@foxmail.com)
+ /// @date    2016-10-18 14:40:36
+ ///
+//initalize the sequence do not by the initalize list
+//but by the declaration in the class
+//destructor when the class is out its life cycle.
+//then the destructor 
+//
+
+复制构造函数的调用时机
+1，形参与实参都是对象
+2，进行赋值时
+3，函数返回时
+
+隐式转换，中间会生成一个临时对像，
+
+赋值运算符
+Point & operator= (const Point & rhs);
+
+隐含参数 this -> 对象本身:
+the对象本身,不能做修改
+
+赋值运算符的返回值,使用引用,而不是对象
+自赋值问题，if(this != rhs){}
+
