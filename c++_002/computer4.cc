@@ -16,6 +16,7 @@ class Computer
 public:
 	Computer(const char * brand, float price);
 
+//#if 0
 #if 0
 	//系统默认的复制构造函数
 	Computer(const Computer & rhs)
@@ -26,6 +27,7 @@ public:
 	}
 #endif
 
+#if 1
 	Computer(const Computer & rhs)
 	: _brand(new char[strlen(rhs._brand) + 1]) 
 	, _price(rhs._price)
@@ -33,7 +35,7 @@ public:
 		cout << "Computer(const Computer &)" << endl;
 		strcpy(_brand, rhs._brand);// 深拷贝
 	}
-
+#endif
 
 	~Computer();
 

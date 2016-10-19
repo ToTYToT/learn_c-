@@ -19,6 +19,7 @@ public:
 	//如果参数是对象，在发生复制构造时，会导致无穷递归，
 	//直到栈溢出
 	Point(const Point & rhs);
+	//Point(const Point  rhs);
 
 	~Point();
 
@@ -38,10 +39,11 @@ Point::Point(int ix, int iy)
 }
 
 Point::Point(const Point & rhs)
+//Point::Point(const Point rhs)
 : _ix(rhs._ix)
 , _iy(rhs._iy)
 {
-	cout << "Point(const Point & rhs)" << endl;
+	cout << "Point(const Point  rhs)" << endl;
 }
 
 Point::~Point()
@@ -60,6 +62,7 @@ void Point::print()
 //会调用复制构造函数
 void func1(Point pt)
 {// Point pt = pt1
+	Point pt1 = pt;
 	pt.print();
 }
 
@@ -78,8 +81,10 @@ int test(void)
 	Point pt1(1, 2);
 	pt1.print();
 
-	//Point pt2 = pt1;//调用复制构造函数
-	Point pt2(pt1);
+//	Point pt2 = pt1;//调用复制构造函数
+	Point pt2 = pt1;//调用复制构造函数
+//	Point pt2(pt1);
+	Point pt3(pt1);
 	pt2.print();
 
 	return 0;
@@ -95,6 +100,7 @@ int test1(void)
 int main(void)
 {
 	//Point p = func2();
+	Point p = func2();
 	func2();
 	return 0;
 }

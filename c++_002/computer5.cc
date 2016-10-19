@@ -39,7 +39,7 @@ public:
 		cout << "Computer(const Computer &)" << endl;
 		strcpy(_brand, rhs._brand);// 深拷贝
 	}
-
+#if 1
 	Computer & operator=(const Computer & rhs)
 	{
 		if(this != &rhs)    //1.自复制
@@ -55,7 +55,7 @@ public:
 
 		return *this;
 	}
-
+#endif 
 	~Computer();
 
 	void print();//成员函数
@@ -111,6 +111,6 @@ int main(void)
 	com = pc;
 	com.print();
 
-
+//	com=com;
 	return 0;
 }

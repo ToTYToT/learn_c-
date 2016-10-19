@@ -12,9 +12,10 @@ using std::endl;
 class Point
 {
 public:
-	//implicit
-	explicit // 可以禁止隐式转换
+//	implicit
+//	explicit // 可以禁止隐式转换
 	Point(int ix = 0, int iy = 0);
+//	Point();
 
 	void print();
 private:
@@ -23,7 +24,7 @@ private:
 };
 
 
-#if 0
+#if 0 
 Point::Point()
 {
 	cout << "Point()" << endl;

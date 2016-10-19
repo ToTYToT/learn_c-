@@ -1,3 +1,10 @@
+格式：
+函数名
+1.运行结果
+2.改变参数、代码行号与前三个字符（标志唯一性）（依次）。
+重运行结果
+3,对应知识点
+
 Point.cc 
 1,构造函数可以进行重载的
 2,有参构造函数
@@ -10,9 +17,218 @@ Point3.cc
 2,在退出作用域时，析构函数启动
 
 Point4.cc
+1,复制构造函数的参数
+2,返回值，形参和实参，声明并初始化
 //复制构造函数的参数只能是const 引用，不能是对象，
 //如果参数是对象，在发生复制构造时，会导致无穷递归，
 //直到栈溢出
+
+//编译器默认情况下是有优化操作的，
+//加上编译选项 -fno-elide-constructors后，
+//再执行就会看到复制构造函数被调用的过程
+
+run of the result:
+    Point(int,int)
+    (3,4)
+    Point(const Point  rhs)
+    ~Point()
+    Point(const Point  rhs)
+    ~Point()
+    Point(int,int)
+    (3,4)
+    Point(const Point  rhs)
+    ~Point()
+    ~Point()
+    ~Point()
+
+Point5.cc
+1,隐式转换
+Point5.cc: In function ‘int main()’:
+    Point5.cc:53:8: error: call of overloaded ‘Point()’ is ambiguous
+    Point pt1;
+    ^
+    Point5.cc:53:8: note: candidates are:
+        Point5.cc:29:1: note: Point::Point()
+        Point::Point()
+        ^
+        Point5.cc:37:1: note: Point::Point(int, int)
+        Point::Point(int ix, int iy)
+2.        ^
+Point5.cc: In function ‘int main()’:
+    Point5.cc:58:14: error: conversion from ‘int’ to non-scalar type ‘Point’ requested
+    Point pt3 = 5;//隐式转换,中间会生成一个临时对象
+3.
+Point(int,int)
+(0,0)
+Point(int,int)
+(1,2)
+Point(int,int)
+(5,0)
+
+Point6.cc
+1,赋值运算符函数
+Point(int,int)
+(1,2)
+Point(const Point & rhs)
+(1,2)
+Point(int,int)
+(1,2)
+~Point()
+~Point()
+~Point()
+2,
+//考虑一个自复制的问题
+
+computer.cc
+1.
+品牌:Lenovo
+价格:4000
+//自定义的头文件放在C头文件的上面
+//把C的头文件全部放在C++头文件的上面
+//把类的public部分的内容放在上面，
+//private部分的内容放在下面
+//com._price = 4000;//Error，_price已经被封装了，不能直接访问
+
+computer2.cc
+1.
+品牌:Lenovo
+价格:4000
+2,struct and class
+默认情况下的访问修饰符，前一个为public，后一个为private
+
+computer3.cc
+1.///com.~Computer();//析构函数是可以显示调用；但是不推荐这样使用
+2.不调用时的结果
+Computer(const char *, float)
+品牌:Lenovo
+价格:4000
+
+~Computer()
+3.显式调用时，运行结果
+Computer(const char *, float)
+品牌:Lenovo
+价格:4000
+~Computer()
+
+~Computer()
+*** Error in `./a.out': double free or corruption (fasttop): 0x090c2008 ***
+Aborted (core dumped)
+
+computer4.cc
+1.
+#if 0
+	//系统默认的复制构造函数
+	Computer(const Computer & rhs)
+	: _brand(rhs._brand)  //浅拷贝
+	, _price(rhs._price)
+	{
+		
+	}
+#endif
+2.重写复制构造函数后，运行的结果
+Computer(const char *, float)
+品牌:Lenovo
+价格:4000
+
+Computer(const Computer &)
+品牌:Lenovo
+价格:4000
+~Computer()
+~Computer()
+3.没有重写时，运行的结果：
+Computer(const char *, float)
+品牌:Lenovo
+价格:4000
+
+品牌:Lenovo
+价格:4000
+~Computer()
+~Computer()
+*** Error in `./a.out': double free or corruption (fasttop): 0x086fe008 ***
+Aborted (core dumped)
+4.
+	Computer pc(com);//调用的复制构造函数
+
+
+computer5.cc
+1.
+Computer(const char *, float)
+品牌:Lenovo
+价格:4000
+
+Computer(const char *, float)
+品牌:Mac
+价格:10000
+品牌:Mac
+价格:10000
+~Computer()
+~Computer()
+2.自复制
+Computer(const char *, float)
+品牌:Lenovo
+价格:4000
+
+Computer(const char *, float)
+品牌:Mac
+价格:10000
+品牌:Mac
+价格:10000
+~Computer()
+~Computer()
+# 问题在于，自复制后，自复制前申请的空间没有被释放
+3.用系统默认的赋值构造函数的运行结果
+Computer(const char *, float)
+品牌:Lenovo
+价格:4000
+
+Computer(const char *, float)
+品牌:Mac
+价格:10000
+品牌:Mac
+价格:10000
+~Computer()
+~Computer()
+*** Error in `./a.out': double free or corruption (fasttop): 0x08e88018 ***
+Aborted (core dumped)
+
+memory.cc
+1.
+memory.cc: In function ‘int main()’:
+    memory.cc:22:14: warning: deprecated conversion from string constant to ‘char*’ [-Wwrite-strings]
+    char * p3 = "123456";
+                    ^
+ &a = 0x804a0d0
+ &p1 = 0x804a0d4
+ &d = 0x8048a08
+ &e = 0xbfe20b40
+ &b = 0xbfe20b34
+ s = 0xbfe20b45
+ &p2 = 0xbfe20b38
+ &p3 = 0xbfe20b3c
+ p3 = 0x8048990
+ &c = 0x804a0dc
+ p1 = 0x9a02008
+ p2 = 0x9a02018
+
+2.
+	*p3 = 'h';//试图修改文字常量区的内容,Error
+运行的结果：
+&a = 0x804a0d0
+&p1 = 0x804a0d4
+&d = 0x8048a20
+&e = 0xbfdad4e0
+&b = 0xbfdad4d4
+s = 0xbfdad4e5
+&p2 = 0xbfdad4d8
+&p3 = 0xbfdad4dc
+p3 = 0x80489a0
+&c = 0x804a0dc
+p1 = 0x8a25008
+p2 = 0x8a25018
+
+Segmentation fault (core dumped)
+
+
 
 0. 当天代码全部实现一遍
 
@@ -28,34 +244,34 @@ Point4.cc
 5. 实现一个String类，保证main函数对正确执行
 class String
 {
-	public:
-		String();
-		String(const char *pstr);
-		String(const String & rhs);
-		String & operator=(const String & rhs);
-		~String();
+    public:
+    String();
+    String(const char *pstr);
+    String(const String & rhs);
+    String & operator=(const String & rhs);
+    ~String();
 
-		void print();
+    void print();
 
-	private:
-		char * _pstr;
+    private:
+    char * _pstr;
 };
 
 int main(void)
 {
-	String str1;
-	str1.print();
+    String str1;
+    str1.print();
 
-	String str2 = "Hello,world";
-	String str3 = "wangdao";
+    String str2 = "Hello,world";
+    String str3 = "wangdao";
 
-	str2.print();str2
-		str3.print();
-	str2 = str3;
-	str2.print();print
+    str2.print();str2
+    str3.print();
+    str2 = str3;
+    str2.print();print
 
-		String str4 = str3;
-	str4.print();
-	return 0;
+    String str4 = str3;
+    str4.print();
+    return 0;
 }
 

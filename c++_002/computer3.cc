@@ -66,7 +66,7 @@ int main(void)
 {
 	Computer com("Lenovo", 4000);
 	com.print();
-	//com.~Computer();//析构函数是可以显示调用；但是不推荐这样使用
+//	com.~Computer();//析构函数是可以显示调用；但是不推荐这样使用
 					//它的主要功能就是清理现场
 	cout << endl;
 
