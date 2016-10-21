@@ -1,0 +1,181 @@
+
+
+1. -fno-elide-
+
+2.four basic functions:
+构造函数，析构函数，复制构造函数，赋值运算符函数
+类名（参数 arguments）
+~类名（）
+类名（const 类名 & rhs）
+类名 & operator=（const 类名 & rhs）
+
+3.初始化表达式，将所有成员都放在初始化列表中。
+
+const 必须进行初始化,放在初始化列表中
+const,引用必须存在
+对象成员的初始化必须放在初始化列表中完成对象成员的初始化
+
+static 只能在类之外进行初始化:
+类型 类名::数据成员=(基本数据类型);
+类型 类名::数据成员=
+
+static 成员函数:
+没有隐含的this指针
+不能直接访问非静态的数据成员
+只能访问静态的数据成员和成员函数
+
+const成员函数:
+只能读取数据成员,不能修改
+只能调用const成员函数,不能非const成员函数:成员函数
+this指针所指向的对像是个const对象
+
+const对象 只能调用const成员函数
+非const对象能调用const成员函数
+如果定义的成员函数没有修改任何数据成员,最好将该成员定义为const成员函数
+
+对象数组,
+constructor
+
+类,class,对象,
+static,const,成员函数,数据成员.
+
+pthread safety
+
+只能生成栈对象，就是说不能生成堆对象，亦即不能通过new表达式[在类之外]生成对象:
+不能生成堆对象能想到的方法：
+将构造函数放入private区域
+operator new函数 放入到private区域
+
+
+
+
+只能生成堆对象，就是说不能生成栈对象，亦即在创建栈对象时，不能[在类之外]调用构造函数或者析构函数:
+不能生成栈对象能想到的方法：
+不能生成?将构造函数放到private区域
+不能生成?将析构函数放到private区域
+不能生成?对于堆对象而言，执行delete表达式无法通过编译
+不能生成?在public区域定义一个destroy()
+
+day 03 20161019
+0. 复习
+1. 类和对象
+特殊的数据成员必须要放在初始化列表之中
+const，引用，对象成员
+
+class Line
+{
+public:
+Line(int x1, int y1, int x2, int y2)
+: _p1(x1, y1)
+, _p2(x2, y2)
+{}
+private:
+Point _p1;
+Point _p2;
+};
+
+只能在类之外进行初始化的是static的数据成员
+类型 类名::数据成员;
+
+class Point
+{
+public:
+void print(Point * const this)
+{
+//this->_ix = 100;
+//this->_iy = 1000;
+}
+void print(const Point * const this ) const
+{
+cout << "(" << this->_ix
+<< "," << this->_iy
+<< ")" << endl;
+}
+
+private:
+int _ix;
+int _iy;
+}; 
+
+class Computer
+{
+public:
+//静态成员函数的参数之中没有隐含的this指针
+static void printTotalPrice()
+{
+cout << _totalPrice;
+}
+private:
+float _price;
+static float _totalPrice;
+};
+特殊的成员函数
+static成员函数:
+> 静态成员函数没有隐含的this指针
+> 不能直接访问非静态的数据成员
+> 只能访问静态的数据成员和成员函数
+
+const成员函数:
+> 只能读取数据成员，不能修改
+> 只能调用const成员函数，不能调用非const成员函数
+> this指针所指向的对象是一个const对象 
+
+> const对象只能调用const成员函数
+> 非const对象是能够调用const成员函数的
+> 如果定义的成员函数没有修改任何数据成员，
+最好将该成员时候定义为const成员函数          
+
+对象数组
+Point arr[5] = {Point(1, 2), Point(3, 4)};
+对象的大小
+class Cell 
+> 系统是32位还是64位的
+> 内存字节对齐
+> static数据成员并不占据对象的存储空间
+> 引用也会占用一个指针的大小
+单例模式
+> 在内存中，类的实例只有一个
+> 不能是栈对象
+> 只能是一个堆对象
+> 
+
+
+class Singleton
+{
+public:
+
+static Singleton * getInstance()
+{   //不能保证线程安全
+if(NULL == _pInstance)
+{
+_pInstance = new Singleton;
+}
+return _pInstance;
+}
+
+static void destroy()
+{
+if(_pInstance)
+delete _pInstance;
+}
+
+private:
+Singleton(){}
+~Singleton(){}
+private:
+static Singleton * _pInstance;
+};    
+
+//Singleton s1;//Error
+int main(void)
+{
+//Singleton s1;//Error
+//Singleton * p1 = new Singleton;//Error
+//Singleton * p2 = new Singleton;
+
+Singleton * p3 = Singleton::getInstance();
+
+//delete p3;//Error
+
+Singleton::destroy();
+}

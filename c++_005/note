@@ -1,0 +1,68 @@
+day 04 20161020
+0. 复习
+1. new/delete扩展
+
+//int * pa = new int(3);
+Point * pt = new Point(1, 2);
+delete pt;
+
+new表达式的工作步骤：
+> a. 先调用operator new库函数去开辟未类型化的空间
+> b. 然后再调用构造函数初始化对象
+> c. 最后返回一个指向对象的指针
+
+delete表达式的工作步骤：
+> a. 先调用析构函数
+> b. 然后调用operator delete库函数释放空间
+
+
+Student * pt = new Student(100, "Mike");//OK
+delete pt;//Error  在类之外不能正常运行
+
+Student s(101, "Jack");//Error
+
+只能生成一个堆对象
+> 把析构函数放在private区域
+
+
+//Student * pt = new Student(100, "Mike");//Error
+
+Student s(101, "Jack");//OK
+只能生成一个栈对象   
+> 把operator new 放在private区域
+
+2. C++之输入输出流
+> 流的状态: 
+badbit    系统级的故障，不可恢复
+failbit   可以恢复的故障
+eofbit    是否到达文件的末尾
+goodbit   流的状态是否为有效状态
+
+clear()   重置流的状态
+ignore(1024, '\n');
+
+> 标准输入输出流
+> <iostream>
+> cin/cout/cerr
+
+int num;
+cin >> num;  //afas     
+cout << num;
+
+
+> 文件输入输出流
+> <fstream>
+> ifstream/ofstream/fstream
+> 输入流要确保文件存在，输出流不需要
+> 输出流默认情况下，不指定打开的文件模式时，
+直接清空文件，然后再做写操作
+> 如果要在文件末尾直接添加数据，要使用 std::ios::app模式
+> ifstream ->tellg  seekg
+ofstream ->tellp  seekp
+
+> 字符串输入输出流
+> <sstream>
+> istringstream/ostringstream/stringstream  
+
+
+

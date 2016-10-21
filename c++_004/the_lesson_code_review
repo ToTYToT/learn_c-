@@ -1,0 +1,169 @@
+
+io1.cc
+1.
+
+//37 重置流的状态, cin.clear()
+cin's badbit  = 0
+cin's failbit = 0
+cin's eofbit  = 0
+cin's goodbit = 1
+12
+num = 12
+a
+
+cin's badbit  = 0
+cin's failbit = 1
+cin's eofbit  = 0
+cin's goodbit = 0
+
+cin's badbit  = 0
+cin's failbit = 1
+cin's eofbit  = 0
+cin's goodbit = 0
+s =
+
+//37,41 输入流是有缓冲区的,同//37 相同
+cin's badbit  = 0
+cin's failbit = 0
+cin's eofbit  = 0
+cin's goodbit = 1
+67
+num = 67
+hj
+
+cin's badbit  = 0
+cin's failbit = 1
+cin's eofbit  = 0
+cin's goodbit = 0
+
+cin's badbit  = 0
+cin's failbit = 1
+cin's eofbit  = 0
+cin's goodbit = 0
+s =
+
+//41,open 37
+cin's badbit  = 0
+cin's failbit = 0
+cin's eofbit  = 0
+cin's goodbit = 1
+12
+num = 12
+df
+
+cin's badbit  = 0
+cin's failbit = 1
+cin's eofbit  = 0
+cin's goodbit = 0
+
+cin's badbit  = 0
+cin's failbit = 0
+cin's eofbit  = 0
+cin's goodbit = 1
+s = df
+
+2.test2
+1sdfasfew
+ival = 1
+data illegal, try again!
+23fsd3fwe43sef234
+ival = 23
+data illegal, try again!
+
+
+io2.cc
+//打开文件流，要求文件必须能存在
+??getline,becasue #if 1,so no read?
+
+io3.cc
+1.异常输入
+1 2 3 f g e d s f e
+20
+0
+1 2 3 0 0 0 0 0 0 0
+2.正常输入
+1 2 3 4 5 6 7 8 9 0
+20
+0
+1 2 3 4 5 6 7 8 9 0
+
+vertor
+1.
+//动态数组, 动态扩展容量
+//当元素的数量与capacity的数量相等，并且有新元素添加时
+//先开辟2 * capacity的空间，然后再将原来的元素copy到新开辟的空间
+//最后将新元素添加到新开辟空间，并且释放原来的空间
+1.
+vecInt's size = 0
+vecInt's capacity = 0
+vecInt's size = 1
+vecInt's capacity = 1
+vecInt's size = 2
+vecInt's capacity = 2
+vecInt's size = 3
+vecInt's capacity = 4
+vecInt's size = 5
+vecInt's capacity = 8
+vecInt's size = 9
+vecInt's capacity = 16
+vecInt's size = 17
+vecInt's capacity = 32
+vecInt's size = 33
+vecInt's capacity = 64
+vecInt's size = 65
+vecInt's capacity = 128
+vecInt's size = 129
+vecInt's capacity = 256
+
+Student.cc
+1.
+void * operator new(size_t)
+Student(int,const char *)
+学号:100
+姓名:Mike
+~Student()
+void operator delete(void*)
+
+Student-stack.cc
+1.
+Student(int,const char *)
+学号:101
+姓名:Jack
+~Student()
+
+Student-heap.cc
+1.
+void * operator new(size_t)
+Student(int,const char *)
+学号:100
+姓名:Mike
+~Student()
+void operator delete(void*)
+2.
+//delete // of 28 
+void * operator new(size_t)
+ent(int,const char *)
+学号:100
+姓名:Mike
+~Student()
+void operator delete(void*)
+~Student()
+3.
+//delete // of 28 and 29
+void * operator new(size_t)
+Student(int,const char *)
+学号:100
+姓名:Mike
+~Student()
+void operator delete(void*)
+~Student()
+4.
+//delete // of 28,29,37
+void * operator new(size_t)
+ent(int,const char *)
+学号:100
+姓名:Mike
+dent()
+*** Error in `./a.out': double free or corruption (fasttop): 0x0838a018 ***
+Aborted (core dumped)
+

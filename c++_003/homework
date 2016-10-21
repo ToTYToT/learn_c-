@@ -1,0 +1,83 @@
+0. 当天代码全部实现一遍
+1. 理解this指针及其用法
+2. 理解static数据成员、static成员函数和const成员函数的用法
+3. 理解单例模式的实现原理，并掌握，做到随手能够写出来
+4. 将Linux下的互斥锁封装成一个MutexLock类，实现互斥锁中的加锁和解锁功能
+
+class MutexLock
+{
+    public:
+    MutexLock();
+    ~MutexLock();
+
+    void lock();
+    void unlock();
+    private:
+    //...补充数据成员
+};
+
+1.
+mutex.cc: In function ‘int main()’:
+mutex.cc:46:16: error: invalid use of non-static member function
+lock_1.lock;
+^
+mutex.cc:47:18: error: invalid use of non-static member function
+lock_1.unlock;
+^
+2.
+
+
+1. 下面哪种说法是错误的？(  )
+	A. 析构函数有且仅有一个
+	B. 析构函数和构造函数一样可以有形参
+	C. 析构函数的功能是用来释放一个对象
+	D. 析构函数无任何函数类型
+
+2. 下面关于类和对象的描述中，错误的是( )
+	A. 类就是C语言中的结构体类型，对象就是C语言中的结构体变量
+	B. 类和对象之间的关系是抽象和具体的关系
+	C. 对象是类的实例，一个对象必须属于一个已知的类
+	D. 类是具有共同行为的若干对象的统一描述体
+
+	int * pa[3];
+
+	3. 若PAT是一个类，则程序运行时，语句 "PAT(*ad)[3];" 会调用
+PAT的构造函数次数是( )
+	A. 2 
+	B. 3
+	C. 0
+	D. 1    
+
+	4. 假定CSomething是一个类，执行下面这些语句之后，内存里创建了( )个
+	CSomething对象
+
+	CSomething a();// 函数声明
+	CSomething b(2);
+	CSomething c[3];
+	CSomething &ra = b;
+CSomething d = b;
+CSomething *pA = c;
+CSomething *p = new CSomething(4);
+
+A. 10   B. 9   C. 8   D. 7   E. 6   F.  5
+
+5. 有一个类A, 其数据成员如下：
+class A
+{
+    ...
+    private:
+    int a;
+    public:
+    const int b;
+    float *& c;
+    static const char * d;
+    static double * e;
+};
+则构造函数中，成员变量一定要通过初始化列表来初始化的是 ( )
+A. a b c
+B. b c
+C. b c d e
+D. b c d
+E. b
+
+

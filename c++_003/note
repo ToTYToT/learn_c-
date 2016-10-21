@@ -1,0 +1,271 @@
+
+
+程序一点点写，cout<< ""<<endl信息,标识运行情况
+
+#if 0
+String & operator=(const String & rhs)
+{
+    if(this != &rhs)
+    {
+        delete [] _pstr;
+        _pstr = new char[strlen(rhs._pstr) + 1];//有异常安全的风险，如果申请不到堆空间
+        strcpy(ptmp,rhs._pstr);
+    }
+    return *this;
+}
+#endif
+
+#if 0
+String & operator=(const String & rhs)
+{
+    if(this != &rhs)
+    {
+        ptmp=new char[strlen(rhs._pstr)+1];
+        if(ptmp)
+        {            
+            strcpy(ptmp,rhs._pstr);
+            delete [] _pstr;
+            _pstr = ptmp;
+        }
+    }
+    return *this;
+}
+#endif
+
+
+#if 1 
+String & operator=(const String & rhs)
+{
+    if(this != &rhs)
+    {
+        String tmp(rhs);
+        char * p;
+        p=tmp._pstr;
+        this->_pstr=p;
+        tmp._pstr=this->_pstr;
+    }
+    return *this;
+}
+#endif
+
+private:
+    const 与 & 必须在初始化列表里
+
+缩进：
+
+
+如果没有初始化，会隐式初始化
+对象成员会调用无参构造函数
+
+static数据成员初始化
+静态数据成员只能在类之外进行初始化
+它会由所有类的成员共享
+static func do not have a this.
+static dn not have 
+static func can be used in class::func;
+
+非const 对象可以使用const函数
+const对象只能调用const函数
+
+class 中 static不会占据class的内存空间
+内存字节对齐的问题
+
+singleton
+单例设计模式（singleton)
+设计模式：singleton
+内存中只能有一份对象
+//单例设计模式：类在内存中只能有1个实例
+//实现步骤：
+1. 将构造函数私有化。
+2.在类中定义一个静态的指针对象（可为私有，可为公有），并在类外初始化为空
+3.定义一个返回值为类指针的静态成员函数，如果2中的指针对象为空，则初始化对象，以后再有对象调用该静态成员函数的时候，不再初始化对象，而是直接返回对象，保证类在内存中只有一个实例。
+
+对象还没有生成出来，而生成对象函数又需要对象调用，才能生成对象，你说这没有意思？
+
+
+Point.cc
+1.
+Point(int,int)
+(0,0)
+Point(int,int)
+(1,2)
+2.change Point(int ix=0,int iy=0) 
+    -> Point(int ix,int iy)
+Point.cc: In function ‘int main()’:
+    Point.cc:44:8: error: no matching function for call to ‘Point::Point()’
+    Point pt1;
+    ^
+    Point.cc:44:8: note: candidates are:
+    Point.cc:26:1: note: Point::Point(int, int)
+    Point::Point(int ix, int iy)
+    ^
+    Point.cc:26:1: note:   candidate expects 2 arguments, 0 provided
+    Point.cc:12:7: note: Point::Point(const Point&)
+    class Point
+    ^
+    Point.cc:12:7: note:   candidate expects 1 argument, 0 provided
+
+Point2.cc
+1.
+Point(int,int)
+(3,4,3,5)
+Point(const Point &rhs)
+(3,4,3,5)
+
+改变pt1中的 _ix之后://reference nearly the point, all is the same address.
+(7,4,7,5)
+(3,4,7,5)
+改变dz的值之后:
+(7,4,7,6)
+(3,4,7,6)
+
+Point3.cc
+1.
+Point(int,int)
+[0,0]
+Point(int,int)
+[1,2]
+Point(int,int)
+(3,4)
+2.
+//如果成员函数不会修改数据成员，都将该成员函数声明为const的成员函数
+Point pt1;//非const对象可以使用const成员函数
+const Point pt3(3, 4);//const对象只能调用const成员函数
+3.change the value _ix in the const func.
+Point3.cc: In member function ‘void Point::print() const’:
+    Point3.cc:36:6: error: assignment of member ‘Point::_ix’ in read-only object
+    _ix = 100;//Error
+    ^
+Point4.cc
+1.
+Point(int,int)
+~Point()
+Point(int,int)
+Point(int,int)
+Point()
+Point()
+Point()
+~Point()
+~Point()
+~Point()
+~Point()
+~Point()
+2.
+Point(7,8);// 匿名对象
+3.don't use the Point(); and the arr[] will wrong ,see  ->4.
+Point(int,int)
+~Point()
+Point(int,int)
+Point(int,int)
+~Point()
+~Point()
+4.the Point() and the arr[5]={}  match;
+Point4.cc: In function ‘int main()’:
+    Point4.cc:53:41: error: no matching function for call to ‘Point::Point()’
+    Point arr[5] = {Point(1,2), Point(3, 4)};
+    ^
+    Point4.cc:53:41: note: candidates are:
+    Point4.cc:36:1: note: Point::Point(int, int)
+    Point::Point(int ix, int iy)
+    ^
+    Point4.cc:36:1: note:   candidate expects 2 arguments, 0 provided
+    Point4.cc:12:7: note: Point::Point(const Point&)
+    class Point
+    ^
+    Point4.cc:12:7: note:   candidate expects 1 argument, 0 provided
+
+cell.cc
+1.
+sizeof(Cell) = 40
+2.no int a, float c, short e[5],
+sizeof(Cell) = 20
+so -> int a sizeof(a)=4,sizeof(e)=12,sizeof(c)=4
+3.continue no char b ,char &f 
+sizeof(Cell) = 12
+so -> char b /in the class will /sizeof(b)=4, char & f, =4
+
+NullPointCall.cc
+1.
+_iy = 0
+very cool!
+ix = 1
+Segmentation fault (core dumped)
+2.change *p to a_realize, 
+_iy = 0
+very cool!
+ix = 1
+_ix = -1078913620
+3.change the test4() _ix to this->_ix, not use
+_iy = 0
+very cool!
+ix = 1
+Segmentation fault (core dumped)
+
+Computer.cc
+1.
+总价：5000
+总价：9000
+2.add in ~Computer(): 
+	cout << "总价：" << _totalPrice << endl;
+总价：5000
+总价：9000
+总价：5000
+总价：0
+
+Computer2.cc
+1.
+品牌:iBM
+价格:5000
+总价：5000
+
+品牌:ASUS
+价格:4000
+总价：9000
+so ->
+    Computer::printTotalprice();//静态成员函数更一般的用法是通过类名进行调用
+    //静态成员函数里面只能访问静态数据成员，
+    //不能访问非静态的数据成员和成员函数
+    //静态成员函数的参数之中不包含隐式的this指针
+    //静态数据成员只能在类之外进行初始化
+    //它会由类生成的所有对象共享
+Line.cc
+1.
+Point(int,int)
+Point(int,int)
+(1,2)-->(3,4)
+
+String.cc
+1.
+String()
+
+String(const char *)
+hello,world
+String(const char *)
+wangdao
+String(const String &)
+~String()
+wangdao
+~String()
+~String()
+~String()
+2.if the stock don't have the memory,we should safe.
+3.remeber this:
+	String & operator=(const String & rhs)
+	{
+		if(this != &rhs)
+		{
+			String tmp(rhs);//
+			char * p = _pstr;
+			_pstr = tmp._pstr;
+			tmp._pstr = p;
+		}
+		return *this;
+	}
+
+Singleton.cc
+1.
+Singleton()
+p1 = 0x8a99008
+p2 = 0x8a99008
+~Singleton()
+2.

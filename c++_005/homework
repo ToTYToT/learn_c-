@@ -1,0 +1,23 @@
+
+0. 当天所讲代码实现一遍
+
+1. 理解new/delete机制，实现只能栈对象和只能生成堆对象代码
+
+2. 统计一篇英文(The_Holy_Bible.txt)文章中出现的单词和词频，
+输入：某篇文章的绝对路径
+输出：词典（词典中的内容为每一行都是一个“单词 词频”）
+ -----------------
+|   a 66          |
+|   abandon 77    |
+|   public 88     |
+|    ......88     |
+|_________________|
+
+class WordStatistic
+{
+public:
+void read_file(std::string filename);
+void write_file(std::string filename);
+private:
+//......
+};

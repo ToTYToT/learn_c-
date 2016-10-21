@@ -1,0 +1,8 @@
+ reference is not an object. Hence, we may not have a pointer to a reference. However, because a pointer is an object, we can define a reference to a pointer.
+r = &i; // r refers to a pointer; assigning &i to r makes p point to i
+It can be easier to understand complicated pointer or reference declarations if you read them from right to left.
+The one restriction is that we may use only those operations that cannot change an object.
+the compiler will usually replace uses of the variable with its corresponding value during compilation. That is, the compiler will generate code using the value 512 in the places that our code uses bufSize.
+As with any other object, we can bind a reference to an object of a const type.
+It may be helpful to think of pointers and references to const as pointers or references “that think they point or refer to const.”
+
