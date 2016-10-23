@@ -22,7 +22,8 @@ using std::endl;
 class Singleton
 {
 public:
-	static Singleton * getInstance()
+	//static Singleton * getInstance()
+	Singleton * getInstance()
 	{
 		if(NULL == _pInstance)
 		{
@@ -31,7 +32,7 @@ public:
 		return _pInstance;
 	}
 
-	static void destroy()
+	void destroy()
 	{
 		if(_pInstance)
 			delete _pInstance;

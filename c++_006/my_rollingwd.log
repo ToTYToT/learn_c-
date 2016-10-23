@@ -1,0 +1,8 @@
+2016-10-22 17:56:03,794: WARN _infoCat : hello
+2016-10-23 08:31:17,357: WARN _infoCat : hello_20161023
+2016-10-23 08:31:49,406: WARN _infoCat : log4cpp_packaging.cc warn 45hello_20161023
+2016-10-23 08:35:33,204: WARN _infoCat : log4cpp_packaging.cc main 115 hello_20161023
+2016-10-23 08:42:37,554: WARN _infoCat : log4cpp_packaging.cc main 117 Message_use_define
+2016-10-23 08:42:37,557: WARN _infoCat : log4cpp_packaging.cc main 115 hello_20161023
+2016-10-23 09:00:43,605: WARN _infoCat : log4cpp_packaging.cc main 112 Message_use_define
+2016-10-23 09:04:58,289: WARN _infoCat : log4cpp_packaging.cc main 112 Message_use_define

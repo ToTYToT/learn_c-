@@ -62,21 +62,24 @@ void WordStatistic::write_file(string filename)
 		{
 			istringstream iss(oelem);
 			iss>>word>>ifrequence;
-		    cout<<word<<"frequence"<<ifrequence<<endl;
+		    //cout<<word<<" frequence "<<ifrequence<<endl;
             if(!word.compare(ielem))
 			{
 				ifrequence++;
+			    oss<<ielem<<" "<<ifrequence<<endl;
+			    word=oss.str();
+			    _oword.push_back(word);
 				flag='1';
 				break;
 			}
-		}
-        cout<<flag<<"here"<<endl;
+        }
+//        cout<<flag<<"here"<<endl;
 		if('1'==flag){
 			flag='0';
             continue;
 		}else
 		{
-			oss<<ielem<<1<<endl;
+			oss<<ielem<<" "<<1<<endl;
 			word=oss.str();
 			_oword.push_back(word);
 		}
