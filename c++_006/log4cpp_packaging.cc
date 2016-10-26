@@ -3,20 +3,7 @@
  /// @author  ToTYToT(hongzimeng@foxmail.com)
  /// @date    2016-10-22 16:17:27
  ///
-#include "log4cpp_mylog.h" 
-#if 0
-#include <log4cpp/Category.hh>
-#include <log4cpp/FileAppender.hh>
-#include <log4cpp/RollingFileAppender.hh>
-#include <log4cpp/PatternLayout.hh>
-#include <log4cpp/Priority.hh>
-#include <log4cpp/OstreamAppender.hh>
-#include <iostream>
-#include <string>
-#include <sstream>
-
-#define logWarn(msg)  p_mylog->warn(__FILE__,__func__,__LINE__,msg)
-#endif
+#include "log4cpp_packaging.h" 
 
 using std::cout;
 using std::endl;
@@ -28,7 +15,6 @@ using namespace log4cpp;
 class Mylog
 {
 public:
-	//static Mylog * getInstance()
 	static Mylog * getInstance()
 	{
 		if(NULL == _pInstance)
@@ -37,13 +23,7 @@ public:
 		}
 		return _pInstance;
 	}
-
-	//static void destroy()
-	void destroy()
-	{
-		if(_pInstance)
-			delete _pInstance;
-	}
+	//void destroy();
 	void warn(const char *filename,const char *function_name,int num,const char *msg)
 	{
         ostringstream oss;
@@ -51,14 +31,12 @@ public:
         string msg_tmp=oss.str();
 		_infoCat.warn(msg_tmp);
 	}
+	~Mylog();
 
 private:
 	Mylog();
-	
-
-	~Mylog();
 private:
-	static Mylog * _pInstance;
+    static Mylog * _pInstance;
 	Category & root = Category::getRoot();
 	Category & _infoCat= root.getInstance("_infoCat");
 	//Category & _infoCat;
@@ -100,18 +78,42 @@ Mylog::Mylog()
 
 Mylog::~Mylog()
 {
+    delete _pInstance;
 	Category::shutdown();
 }
-
-//Mylog * Mylog::_pInstance = getInstance();
-Mylog * Mylog::_pInstance =NULL; 
+#if 1 
+Mylog * Mylog::_pInstance = getInstance();
+#endif
 
 #if 0
-int main(void)
+void Mylog::destroy()
+{
+    if(_pInstance)
+        delete _pInstance;
+}
+#endif 
+#if 0
+Mylog * Mylog::_pInstance =NULL; 
+#endif
+
+#if 1
+int Mylogwarn(void)
 {
 	Mylog * p_mylog=Mylog::getInstance();
 	logWarn("Message_use_define");
-	//p_mylog->warn(__FILE__,__func__,115,"hello_20161023");
-	p_mylog->destroy();
+	p_mylog->warn(__FILE__,__func__,115,"hello_20161023");
+	//delete p_mylog;
+    //p_mylog->destroy();
 }
+#endif
+
+#if 1
+int main(void)
+{
+    Mylogwarn();
+    Mylogwarn();
+    Mylogwarn();
+    Mylogwarn();
+}
+
 #endif
