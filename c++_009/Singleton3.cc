@@ -20,15 +20,17 @@ public:
 		pthread_once(&_once, init);
 		return _pInstance;
 	}
-
+private:
 	static void init()
 	{
+		cout<<"init()"<<endl;
 		_pInstance = new Singleton;
 		atexit(destroy);
 	}
 
 	static void destroy()
 	{
+		cout<<"destroy()"<<endl;
 		if(_pInstance)
 			delete _pInstance;
 	}
@@ -56,7 +58,7 @@ int main(void)
 {
 	Singleton * p1 = Singleton::getInstance();
 	Singleton * p2 = Singleton::getInstance();
-
+	//p1->init();
 	printf("p1 = %p\n", p1);
 	printf("p2 = %p\n", p2);
 

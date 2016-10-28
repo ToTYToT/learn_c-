@@ -22,6 +22,7 @@ private:// AutoRelease是专为Singleton服务的
 
 		~AutoRelease()
 		{
+            cout<<"AutoRelease"<<endl;
 			if(_pInstance)
 				delete _pInstance;
 		}
