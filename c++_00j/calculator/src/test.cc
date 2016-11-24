@@ -17,6 +17,6 @@ int main()
         Scanner a(c);
     Parser b(a);
 	b.Parse();
-    std::cout<<b.Calculate();
+    std::cout<<b.Calculate()<<std::endl;
     }
 }

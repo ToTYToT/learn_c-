@@ -14,7 +14,7 @@ Parser::Parser(Scanner& scanner) : scanner_(scanner), tree_(0)
 {
 }
 
-void Parser::Parse()
+	void Parser::Parse()
 {
 	tree_ = Expr();
 }
@@ -23,21 +23,7 @@ Node* Parser::Expr()
 {
 	Node* node = Term();
 	EToken token = scanner_.Token();
-	//if (token == TOKEN_PLUS)
-	//{
-	//TOKEN_PLUSscanner_.Accept();
-	//AcceptNode* nodeRight = Expr();
-	//Exprnode = new AddNode(node, nodeRight);
-	//}
-	//else if (token == TOKEN_MINUS)
-	//{
-	//TOKEN_MINUSscanner_.Accept();
-	//AcceptNode* nodeRight = Expr();
-	//Exprnode = new SubNode(node, nodeRight);
-	//}
-	if (token == TOKEN_PLUS || token == TOKEN_MINUS)
 	{
-		// Expr := Term { ('+' | '-') Term }
 		MultipleNode* multipleNode = new SumNode(node);
 		do 
 		{
@@ -48,31 +34,15 @@ Node* Parser::Expr()
 		} while (token == TOKEN_PLUS || token == TOKEN_MINUS);
 		node = multipleNode;
 	}
-
 	return node;
 }
-
-
 
 Node* Parser::Term()
 {
 	Node* node = Factor();
 	EToken token = scanner_.Token();
-	//if (token == TOKEN_MULTIPLY)
-	//{
-	//TOKEN_MULTIPLYscanner_.Accept();
-	//AcceptNode* nodeRight = Term();
-	//Termnode = new MultiplyNode(node, nodeRight);
-	//}
-	//else if (token == TOKEN_DIVIDE)
-	//{
-	//TOKEN_DIVIDEscanner_.Accept();
-	//AcceptNode* nodeRight = Term();
-	//Termnode = new DivideNode(node, nodeRight);
-	//}
 	if (token == TOKEN_MULTIPLY || token == TOKEN_DIVIDE)
 	{
-		// Term := Factor { ('*' | '/') Factor }
 		MultipleNode* multipleNode = new ProductNode(node);
 		do 
 		{
@@ -83,7 +53,6 @@ Node* Parser::Term()
 		} while (token == TOKEN_MULTIPLY || token == TOKEN_DIVIDE);
 		node = multipleNode;
 	}
-
 	return node;
 }
 
@@ -93,16 +62,15 @@ Node* Parser::Factor()
 	EToken token = scanner_.Token();
 	if (token == TOKEN_LPARENTHESIS)
 	{
-		scanner_.Accept();//scanner_// accept '('
+		scanner_.Accept();
 			node = Expr();
 		if (scanner_.Token() == TOKEN_RPARENTHESIS)
 		{
-			scanner_.Accept();//Accept// accept ')'
+			scanner_.Accept();
 		}
 		else
 		{
 			status_ = STATUS_ERROR;
-			// Todo:抛出异常
 			std::cout<<"missing parenthesis"<<std::endl;
 			node = 0;
 		}
@@ -114,13 +82,12 @@ Node* Parser::Factor()
 	}
 	else if (token == TOKEN_MINUS)
 	{
-		scanner_.Accept();//scanner_// accept minus
+		scanner_.Accept();
 			node = new UMinusNode(Factor());
 	}
 	else
 	{
 		status_ = STATUS_ERROR;
-		// Todo:抛出异常
 		std::cout<<"not a valid expression"<<std::endl;
 		node = 0;
 	}

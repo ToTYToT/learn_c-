@@ -1,0 +1,50 @@
+
+
+1. 实现cow_string中能区分读操作和写操作的
+下标访问运算符函数
+
+2. 使用tinyXml2解析RSS文件，并生成一个网页库pagelib.dat
+
+tinyXml2 -- https://github.com/leethomason/tinyxml2
+rss    --   http://www.runoob.com/rss/rss-tutorial.html
+
+抽象出RSS文件的内容
+struct RssItem
+{
+string title;
+string link;
+string description;
+string content;
+};
+struct RssData
+{
+string title;
+string link;
+string description;
+string date;
+vector<RssItem> items;
+};   
+
+class RssReader
+{
+public:
+RssReader();
+
+void parseRss();//解析
+void dump();//输出
+private:
+RssData _rssData;
+};   
+
+最后生成一个 pagelib.dat, 其格式:
+
+<doc>
+<docid>1</docid>
+<title> ... </title>
+<link> ...  </link>
+<description> ... </description>
+<content> ... </content>
+</doc>
+<doc>
+...
+</doc>

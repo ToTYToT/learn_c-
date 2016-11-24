@@ -9,7 +9,10 @@
 #include "node.h"
 #include <cassert>
 #include <iostream>
-
+int e_cout_num;
+int t_cout_num;
+int f_cout_num;
+#if 0
 Parser::Parser(Scanner& scanner) : scanner_(scanner), tree_(0)
 {
 }
@@ -18,9 +21,10 @@ void Parser::Parse()
 {
 	tree_ = Expr();
 }
-
+#endif
 Node* Parser::Expr()
 {
+	++e_cout_num;
 	Node* node = Term();
 	EToken token = scanner_.Token();
 	if (token == TOKEN_PLUS)
@@ -40,6 +44,7 @@ Node* Parser::Expr()
 
 Node* Parser::Term()
 {
+	++t_cout_num;
 	Node* node = Factor();
 	EToken token = scanner_.Token();
 	if (token == TOKEN_MULTIPLY)
@@ -59,6 +64,7 @@ Node* Parser::Term()
 
 Node* Parser::Factor()
 {
+	++f_cout_num;
 	Node* node = 0;
 	EToken token = scanner_.Token();
 	if (token == TOKEN_LPARENTHESIS)
@@ -72,7 +78,6 @@ Node* Parser::Factor()
 		else
 		{
 			status_ = STATUS_ERROR;
-			// Todo:抛出异常
 			std::cout<<"missing parenthesis"<<std::endl;
 			node = 0;
 		}
@@ -90,16 +95,18 @@ Node* Parser::Factor()
 	else
 	{
 		status_ = STATUS_ERROR;
-		// Todo:抛出异常
 		std::cout<<"not a valid expression"<<std::endl;
 		node = 0;
 	}
 	return node;
 }
-
+#if 1
 double Parser::Calculate() const
 {
 	assert(tree_ != 0);
+	std::cout<<e_cout_num<<std::endl;
+	std::cout<<t_cout_num<<std::endl;
+	std::cout<<f_cout_num<<std::endl;
 	return tree_->Calc();
 }
-
+#endif

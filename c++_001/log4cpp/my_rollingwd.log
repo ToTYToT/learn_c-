@@ -1,0 +1,14 @@
+2016-10-23 23:27:02,675: WARN _infoCat : log4cpp_packaging.cc main 99 helloworld
+2016-10-23 23:27:04,576: WARN _infoCat : log4cpp_packaging.cc main 99 helloworld
+2016-10-23 23:27:05,905: WARN _infoCat : log4cpp_packaging.cc main 99 helloworld
+2016-10-23 23:27:06,754: WARN _infoCat : log4cpp_packaging.cc main 99 helloworld
+2016-10-23 23:27:07,590: WARN _infoCat : log4cpp_packaging.cc main 99 helloworld
+2016-10-23 23:27:08,209: WARN _infoCat : log4cpp_packaging.cc main 99 helloworld
+2016-10-23 23:27:08,872: WARN _infoCat : log4cpp_packaging.cc main 99 helloworld
+2016-10-23 23:27:09,610: WARN _infoCat : log4cpp_packaging.cc main 99 helloworld
+2016-10-23 23:29:48,577: WARN _infoCat : log4cpp_packaging.cc main 99 helloworld
+2016-10-23 23:36:07,665: WARN _infoCat : log4cpp_packaging.cc main 144 helloworld
+2016-10-23 23:36:49,575: WARN _infoCat : log4cpp_packaging.cc main 144 helloworld
+2016-10-23 23:36:49,577: DEBUG _infoCat : log4cpp_packaging.cc main 145 helloworld
+2016-10-23 23:36:49,579: INFO _infoCat : log4cpp_packaging.cc main 146 helloworld
+2016-10-23 23:36:49,580: ERROR _infoCat : log4cpp_packaging.cc main 147 helloworld

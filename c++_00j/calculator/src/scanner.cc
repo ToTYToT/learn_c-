@@ -3,6 +3,7 @@
 #include "scanner.h"
 #include <stdlib.h>
 
+#if 0
 Scanner::Scanner(const std::string& buf) : buf_(buf), curPos_(0)
 {
 	Accept();//解析出第一个标志
@@ -17,6 +18,7 @@ EToken Scanner::Token() const
 {
 	return token_;//返回标志
 }
+#endif
 
 void Scanner::SkipWhite()//忽略空格
 {

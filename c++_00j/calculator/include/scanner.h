@@ -1,9 +1,3 @@
-/*************************************************************************
-    > File Name: /home/t520/project/learn_c-/c++_00j/calculator/src/scanner.h
-    > Author:ToTYToT
-    > Mail: 240008250@QQ.COM
-    > Created Time: Sun 13 Nov 2016 03:13:36 PM CST
- ************************************************************************/
 
 #ifndef _SCANNER_H_
 #define _SCANNER_H_
@@ -27,10 +21,10 @@ enum EToken
 class Scanner
 {
 	public:
-		Scanner(const std::string& buf);
+		Scanner(const std::string& buf):buf_(buf),curPos_(0){Accept();}
 		void Accept();
-		double Number() const;
-		EToken Token() const;
+		double Number() const{return number_;}
+		EToken Token() const{return token_;}
 	private:
 		void SkipWhite();//忽略空格
 		const std::string buf_;//存储输入字符串

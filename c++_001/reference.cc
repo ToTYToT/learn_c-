@@ -37,18 +37,24 @@ void swap(int & refx, int & refy)
 	refy = temp;
 }
 
+class al
+{};
+al & new_te()
+{
+   al* sdal=new(al);
+    return *sdal;
+}
 
 int test(void)
 {
 	int a = 100;
 	int * pa = &a;
 	*pa = 10;
-
 	int & refa = a;//引用,就是一个变量的别名
 	refa = 1000;
 	cout << "a = " << a << endl;
 	cout << "refa = " << refa << endl;
-
+    al bl=new_te();
 	//int & refb;//引用不能单独存在，它一定要绑定到一个实体上去
 	//引用必须要进行初始化
 	
@@ -96,6 +102,7 @@ int & func3()
 
 int main(void)
 {
+    test();
 	func(0) = 10;
 	cout << "arr[0] = " << arr[0] << endl;
 

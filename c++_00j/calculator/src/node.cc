@@ -4,6 +4,7 @@
  /// @date    2016-11-13 11:07:57
  ///
 
+#if 0
 #include "node.h"
 #include <math.h>
 #include <iostream>
@@ -55,4 +56,4 @@ double UMinusNode::Calc() const
 {
 	return - child_->Calc();
 }
-
+#endif
