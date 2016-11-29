@@ -7,28 +7,29 @@
 namespace T520
 {
 Configuration::Configuration(const string&filepath)
-:_filepath(filepath)//
+:_filepath(filepath)
 ,_confiMap()
 ,_stopWordList()
 {
 	_THE_INFO_OF_RUN;
-	//1) ripepage.lib路径
-	//2) offset.lib路径
-	//3) invertindex.lib路径
-	//4) 分词库路径
-	//5) 停用词库路径
-	//6) 服务器 IP, port
+	createConfigMap();
+	createStopWordList();
 }
 map<string,string> & Configuration::getConfigMap()
 {
 	_THE_INFO_OF_RUN;
-    std::ifstream fint(_filepath);
-    std::string line;
-	std::string word;
-	std::vector<std::string >wordVector;
+	return _confiMap;
+}
+void Configuration::createConfigMap()
+{
+	_THE_INFO_OF_RUN;
+    ifstream fint(_filepath);
+    string line;
+	string word;
+	vector<string >wordVector;
     while(getline(fint,line))
     {
-        std::istringstream iss(line);
+        istringstream iss(line);
         while(iss>>word)
 			wordVector.push_back(word);
     }
@@ -40,21 +41,24 @@ map<string,string> & Configuration::getConfigMap()
 	_confiMap["dataSource.path"]=wordVector[5];
 	_confiMap["ip"]=wordVector[6];
 	_confiMap["port"]=wordVector[7];
-	return _confiMap;
 }
 set<string> Configuration::getStopWordList()
 {
 	_THE_INFO_OF_RUN;
-    std::ifstream fint(_confiMap["stopWordList.path"]);
-    std::string line;
-	std::string word;
+	return _stopWordList;
+}
+void Configuration::createStopWordList()
+{
+	_THE_INFO_OF_RUN;
+    ifstream fint(_confiMap["stopWordList.path"]);
+    string line;
+	string word;
     while(getline(fint,line))
     {
-        std::istringstream iss(line);
+        istringstream iss(line);
         while(iss>>word)
 			_stopWordList.insert(word);
     }
-	return _stopWordList;
 }
 }
 //using namespace T520;

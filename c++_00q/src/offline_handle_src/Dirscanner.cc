@@ -7,28 +7,22 @@
 #include "_THE_INFO_OF_RUN.h"
 #include "Dirscanner.h"
 #include "Configuration.h" 
-//#include <iostream>
 namespace T520
 {
 Dirscanner::Dirscanner(Configuration &conf)
 :_conf(conf)
 {
 	_THE_INFO_OF_RUN;
+	createFiles(_conf.getConfigMap()["dataSource.path"]);
 }
-void Dirscanner::operator()()
-{
-	_THE_INFO_OF_RUN;
-	traverse(_conf.getConfigMap()["dataSource.path"]);
-	//traverse("../../data/rss_source");
-}
-vector<std::string> Dirscanner::files()
+vector<string> Dirscanner::getFiles()
 {
 	_THE_INFO_OF_RUN;
 	//for(auto & elem : _vecFilesfiles)
-	//	std::cout<<elem<<std::endl;
+	//	cout<<elem<<endl;
 	return _vecFilesfiles;
 }
-void Dirscanner::traverse(const string& dirname)
+void Dirscanner::createFiles(const string& dirname)
 {
 	_THE_INFO_OF_RUN;
 	DIR* dir;
@@ -48,7 +42,8 @@ void Dirscanner::traverse(const string& dirname)
 			if(p->d_type ==4)
 			{
 				sprintf(buf,"%s%s%s",dirname.c_str(),"/",p->d_name);
-				traverse(buf);
+				createFiles(buf);
+				//traverse(buf);
 			}else
 			{
 				sprintf(buf,"%s%s%s",dirname.c_str(),"/",p->d_name);

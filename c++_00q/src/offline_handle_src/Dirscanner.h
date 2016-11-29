@@ -9,10 +9,6 @@
 #include <sys/types.h>
 #include <dirent.h>
 #include <string.h>
-#include <vector>
-#include <string>
-using std::string;
-using std::vector;
 namespace T520
 {
 class Configuration;
@@ -20,10 +16,9 @@ class Dirscanner
 {
 public:
     Dirscanner(Configuration& conf);
-    void operator()();
-    vector<string> files();
+	vector<string> getFiles();
 private:
-    void traverse(const string& dirname);
+	void createFiles(const string&dirname);
 private:
     vector<string> _vecFilesfiles;
     Configuration &_conf;

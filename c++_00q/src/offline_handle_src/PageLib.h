@@ -6,17 +6,6 @@
 #ifndef __T_PAGELIB_H__ 
 #define __T_PAGELIB_H__
 #include "_THE_INFO_OF_RUN.h"
-#include <map>
-#include <vector>
-#include <string>
-#include <utility>
-#include <sstream>
-#include <fstream>
-using std::string;
-using std::map;
-using std::vector;
-using std::pair;
-using std::ofstream;
 namespace T520
 {
 class Configuration;

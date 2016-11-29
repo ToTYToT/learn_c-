@@ -12,13 +12,19 @@ ReadXMLFile::ReadXMLFile()
 {};
 void ReadXMLFile::parseRss(const char * xmlPath)
 {
+	_THE_INFO_OF_RUN;
 	XMLDocument doc;
 	if(doc.LoadFile(xmlPath)!=0)
 	{
 		cout<<"load xml file failed"<<endl;
 		return ;
 	}
-    XMLElement * channelNode=doc.FirstChildElement("rss")->FirstChildElement("channel");
+    XMLElement * rssNode=doc.FirstChildElement("rss");
+	if((NULL==rssNode)!=0)
+	{
+		return ;
+	}
+	XMLElement * channelNode=rssNode->FirstChildElement("channel");
     if(NULL==channelNode)
         return ;
 	_item=channelNode->FirstChildElement("item");

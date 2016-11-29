@@ -3,7 +3,6 @@
  /// @author  ToTYToT(hongzimeng@foxmail.com)
  /// @date    2016-11-27 13:51:49
  ///
- 
 #include "_THE_INFO_OF_RUN.h"
 #include "PageLib.h"
 #include "Configuration.h"
@@ -24,15 +23,18 @@ PageLib::PageLib(Configuration &conf,Dirscanner &dirscanner,ReadXMLFile&readXML)
 void PageLib::create()
 {
 	_THE_INFO_OF_RUN;
-	vector<string> tmp(_dirScanner.files());
+	vector<string> tmp(_dirScanner.getFiles());
 	for(auto &elem : tmp)
+	{
+		cout<<elem.c_str()<<endl;
 		_readXML.parseRss(elem.c_str());
+	}
 	vector<RssItem> itemTest(_readXML.getReadXMLtext());
-	std::ostringstream sout;
+	ostringstream sout;
 	for(auto &elem : itemTest)
 	{
 		sout.str("");
-		sout<<"<doc>"<<"<docid>"<<++_docId<<"</docid><url>"<<elem.link<<"</url><title>"<<elem.title<<"</title><content>"<<elem.content<<"</content></doc>"<<std::endl;
+		sout<<"<doc>"<<"<docid>"<<++_docId<<"</docid><url>"<<elem.link<<"</url><title>"<<elem.title<<"</title><content>"<<elem.content<<"</content></doc>"<<endl;
 		_vecFilesfiles.push_back(sout.str());
 	}
 }
@@ -49,7 +51,22 @@ void PageLib::store()
 		foutOffset<<tmpid<<" "<<tmpSize<<" "<<elem.size()<<"\n";
 		tmpSize+=elem.size();
 	}
+    foutFiles.close();
+    foutOffset.close();
 }
 }
-using namespace T520;
-int main(){}
+//using namespace T520;
+//int main()
+//{
+//	Configuration conf("../../conf/myconf.conf");
+//	//conf.getConfigMap();
+//	//conf.getStopWordList();
+//	Dirscanner dir(conf);
+//	//dir();
+//	//dir.files();
+//    ReadXMLFile xml;
+//    PageLib page(conf,dir,xml);
+//    page.create();
+//    page.store();
+//    return 0;
+//}

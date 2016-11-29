@@ -8,25 +8,6 @@
 #include "_THE_INFO_OF_RUN.h"
 #include <boost/regex.hpp>
 #include "tinyxml2.h"  
-#include <stdlib.h>
-#include <stdio.h>
-#include <iostream>
-#include <string>
-#include <vector>
-#include <sstream>
-#include <fstream>
-#include <map>
-#include <utility>
-#include <unordered_map>
-using std::cout;
-using std::endl;
-using std::string;
-using std::vector;
-using std::ostringstream;
-using std::ofstream;
-using std::map;
-using std::unordered_map;
-using std::pair;
 using namespace tinyxml2;  
 namespace T520
 {
