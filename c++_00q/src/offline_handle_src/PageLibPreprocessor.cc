@@ -142,7 +142,16 @@ void PageLibPreprocessor::createOffsetLib()
 
 void PageLibPreprocessor::storeOnDisk()
 {
-
+	ofstream ofInverse(_conf.getConfigMap()["invertindex.lib"].c_str());
+	unordered_map<string,vector<pair<int,double> > >::iterator mit;
+	vector<pair<int,double> >::iterator vit;
+	for(mit=_invertIndexTable.begin();mit!=_invertIndexTable.end();++mit)
+	{
+		ofInverse<<mit->first<<" ";
+		for(vit=(mit->second).begin();vit!=(mit->second).end();++vit)
+			ofInverse<<vit->first<<" "<<vit->second;
+		ofInverse<<endl;
+	}
 }
 
 }
